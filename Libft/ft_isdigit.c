@@ -6,13 +6,13 @@
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:27:57 by ckarl             #+#    #+#             */
-/*   Updated: 2022/10/24 13:02:28 by ckarl            ###   ########.fr       */
+/*   Updated: 2022/10/27 14:06:29 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(char c)
+int	ft_isdigit(int c)
 {
-	if ((c >= '0' && c <= '9')
+	if (c >= '0' && c <= '9')
 		return (1);
 	else
 		return (0);

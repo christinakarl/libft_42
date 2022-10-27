@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 13:20:11 by ckarl             #+#    #+#             */
-/*   Updated: 2022/10/27 14:24:15 by ckarl            ###   ########.fr       */
+/*   Created: 2022/10/27 12:34:32 by ckarl             #+#    #+#             */
+/*   Updated: 2022/10/27 15:06:42 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-size_t	ft_strlen(const char *str);
-
-size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
+int	ft_atoi(const char *str)
 {
-	size_t			i;
-	size_t			size_src;
+	int	i;
+	int	sign;
+	int	result;
 
-	size_src = ft_strlen(src);
+	result = 0;
+	sign = 1;
 	i = 0;
-	if (size == 0)
-		return (size_src);
-	while (i < (size - 1) && src[i] != '\0')
+	if (str[i] == '-')
 	{
-		dest[i] = src[i];
+		sign *= (-1);
 		i++;
 	}
-	dest[i] = '\0';
-	return (i);
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10 + (str[i] - '0');
+		i++;
+	}
+	return (result * sign);
 }

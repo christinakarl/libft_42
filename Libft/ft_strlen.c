@@ -6,13 +6,13 @@
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 13:11:03 by ckarl             #+#    #+#             */
-/*   Updated: 2022/10/24 13:19:11 by ckarl            ###   ########.fr       */
+/*   Updated: 2022/10/27 14:33:43 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i] != '\0')

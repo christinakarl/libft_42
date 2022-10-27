@@ -6,14 +6,14 @@
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 14:53:58 by ckarl             #+#    #+#             */
-/*   Updated: 2022/10/24 15:25:11 by ckarl            ###   ########.fr       */
+/*   Updated: 2022/10/27 14:31:00 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	unsigned int	i;
-	int				j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	j = 0;

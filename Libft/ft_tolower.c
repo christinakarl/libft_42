@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 13:20:11 by ckarl             #+#    #+#             */
-/*   Updated: 2022/10/27 14:24:15 by ckarl            ###   ########.fr       */
+/*   Created: 2022/10/27 12:33:17 by ckarl             #+#    #+#             */
+/*   Updated: 2022/10/27 14:33:30 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-size_t	ft_strlen(const char *str);
-
-size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
+int	ft_tolower(int c)
 {
-	size_t			i;
-	size_t			size_src;
-
-	size_src = ft_strlen(src);
-	i = 0;
-	if (size == 0)
-		return (size_src);
-	while (i < (size - 1) && src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (i);
+	if (c >= 'A' && c <= 'Z')
+		c += 32;
+	return (c);
 }

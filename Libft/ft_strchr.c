@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 13:20:11 by ckarl             #+#    #+#             */
-/*   Updated: 2022/10/27 14:24:15 by ckarl            ###   ########.fr       */
+/*   Created: 2022/10/27 15:08:25 by ckarl             #+#    #+#             */
+/*   Updated: 2022/10/27 16:49:52 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-size_t	ft_strlen(const char *str);
-
-size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
+char	*ft_strchr(const char *s, int c)
 {
-	size_t			i;
-	size_t			size_src;
+	int		i;
+	char	*str;
 
-	size_src = ft_strlen(src);
+	str = (char *)s;
 	i = 0;
-	if (size == 0)
-		return (size_src);
-	while (i < (size - 1) && src[i] != '\0')
+	if (c == '\0')
+		return (NULL);
+	while (str[i] != '\0')
 	{
-		dest[i] = src[i];
-		i++;
+		if (str[i] == c)
+			return (&str[i]);
+		else
+			i++;
 	}
-	dest[i] = '\0';
-	return (i);
+	return (NULL);
 }
