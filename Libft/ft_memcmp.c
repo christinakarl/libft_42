@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 13:19:20 by ckarl             #+#    #+#             */
-/*   Updated: 2022/10/27 18:35:50 by ckarl            ###   ########.fr       */
+/*   Created: 2022/10/28 11:48:51 by ckarl             #+#    #+#             */
+/*   Updated: 2022/10/28 11:57:05 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memset(void *b, int c, size_t len)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t	i;
-	unsigned char	a;
-	char	*buf;
+	unsigned int		i;
+	const unsigned char	*str1;
+	const unsigned char	*str2;
 
-	buf = (char*) b;
-	a = c;
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
 	i = 0;
-	while (i < len)
+	while (i < n)
 	{
-		buf[i] = a;
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
 		i++;
 	}
-	return (b);
+	return (0);
 }
