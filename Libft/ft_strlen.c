@@ -6,9 +6,11 @@
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 13:11:03 by ckarl             #+#    #+#             */
-/*   Updated: 2022/10/27 14:33:43 by ckarl            ###   ########.fr       */
+/*   Updated: 2022/10/28 16:13:21 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <string.h>
 
 size_t	ft_strlen(const char *str)
 {

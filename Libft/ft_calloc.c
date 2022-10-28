@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/15 14:21:48 by ckarl             #+#    #+#             */
-/*   Updated: 2022/10/28 15:50:21 by ckarl            ###   ########.fr       */
+/*   Created: 2022/10/28 14:50:10 by ckarl             #+#    #+#             */
+/*   Updated: 2022/10/28 15:49:39 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char	*ft_strdup(const char *src)
-{
-	char	*copy;
-	int		i;
+void	*ft_memset(void *b, int c, size_t len);
 
-	i = 0;
-	while (src[i] != '\0')
-		i++;
-	copy = (char *)malloc(sizeof(*copy) * (i + 1));
-	if (copy == NULL)
+void	*ft_calloc(size_t count, size_t size)
+{
+	char	*cal;
+
+	cal = (char *)malloc(size * count);
+	if (cal == NULL)
 		return (NULL);
-	i = 0;
-	while (src[i] != '\0')
-	{
-		copy[i] = src[i];
-		i++;
-	}
-	copy[i] = '\0';
-	return (copy);
+	ft_memset(cal, 0, size * count);
+	return (cal);
 }
