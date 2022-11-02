@@ -10,18 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*memcpy(void *dst, const void *src, size_t n)
+#include "libft.h"
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	char	*s2;
+	char	*s1;
 	size_t	i;
 
 	i = 0;
+	s1 = dst;
 	s2 = src;
 	if (!dst && !s2)
 	   return (0);	
 	while (i < n)
 	{
-		dst[i] = s2[i];
+		s1[i] = s2[i];
 		i++;
 	}
 	return (dst);
