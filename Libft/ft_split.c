@@ -23,6 +23,7 @@ int words(char *s, char c)
     {
         if (s[i] == c)
             count += 1;
+            
 
     }
 
