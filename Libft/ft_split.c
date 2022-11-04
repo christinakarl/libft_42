@@ -12,30 +12,58 @@
 
 #include "libft.h"
 
-int words(char *s, char c)
+int ft_words(char *s, char c)
 {
     int i;
     int count;
+    int index;
 
     i = 0;
-    count = 1;
+    count = 0;
+    index = 1;
     while (s[i] != '\0')
     {
-        if (s[i] == c)
+        if (s[i] == c && index == 0)
+            index = 1;
+        else if (index == 1 && s[i] != c)
+        {
+            index = 0;
             count += 1;
-            
-
+        }
+        i++;
     }
-
+    return (count);
 }  
+
+char    *ft_dup(char *str, int start, int end)
+{
+    int     i;
+    char    *copy;
+
+    i = 0;
+    copy = (char *)malloc(sizeof(*copy) * (end - start + 1));
+    if (!copy)
+        return (NULL);
+    
+
+
+}
 
 char    **ft_split(char const *s, char c)
 {
     char    *str;
     char    **tab;
     int     i;
-    int     indicator;
+    int     index;
+    int     words;
 
+    words = ft_words(str,c)
+    str = (char *)s;
+    i = 0;
+    tab = (char **)malloc(sizeof(char *) * (words + 1));
+    if (!tab || !str)
+        return (NULL);
+    
 
 
 }
