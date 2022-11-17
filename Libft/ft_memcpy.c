@@ -19,10 +19,10 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	size_t	i;
 
 	i = 0;
-	s1 = dst;
-	s2 = src;
+	s1 = (char *)dst;
+	s2 = (char *)src;
 	if (!dst && !s2)
-	   return (0);	
+	   return (0);
 	while (i < n)
 	{
 		s1[i] = s2[i];
