@@ -6,14 +6,14 @@
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 09:54:56 by ckarl             #+#    #+#             */
-/*   Updated: 2022/11/04 19:09:20 by ckarl            ###   ########.fr       */
+/*   Updated: 2022/11/17 14:33:05 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-int	ft_len(int n)
+int	ft_islen(int n)
 {
 	int	len;
 
@@ -36,14 +36,12 @@ char	*ft_itoa(int n)
 	char	*str;
 	int		i;
 
-	i = ft_len(n);
-	str = (char *)malloc(sizeof(*str) * (i + 1));
-	if (!str)
-		return (NULL);
+	i = ft_islen(n);
+	str = (char *)malloc(sizeof(char) * (i + 1));
 	str[i--] = '\0';
 	if (n == 0)
 		str[0] = '0';
-	if (n < 0)
+	else if (n < 0)
 	{
 		if (n == -2147483648)
 		{
@@ -54,7 +52,7 @@ char	*ft_itoa(int n)
 		n *= -1;
 	}
 	while (n > 0)
-	{	
+	{
 		str[i--] = n % 10 + 48;
 		n = n / 10;
 	}
@@ -66,7 +64,7 @@ int	main(void)
 	int	n;
 	char	*str;
 
-	n = -2147483648;
+	n = 19076;
 	str = ft_itoa(n);
 	printf("%s\n", str);
 	return (0);
