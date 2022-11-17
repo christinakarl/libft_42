@@ -18,8 +18,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	char	*str1;
 	char	*str2;
 
-	str1 = (char*)s1;
-	str2 = (char*)s2;
+	str1 = (char *)s1;
+	str2 = (char *)s2;
 	i = 0;
 	while ((s1[i] != '\0' || s2[i] != '\0') && i < n)
 	{

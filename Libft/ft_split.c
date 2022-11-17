@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 int	ft_len(const char *str)
 {
@@ -87,20 +86,4 @@ char	**ft_split(char const *s, char c)
 	}
 	tab[a] = 0;
 	return (tab);
-}
-
-int	main(void)
-{
-	int	i = 0;
-	char **tab;
-	char	*s = "asf888asdf8344238";
-	char	c = '8';
-
-	tab = ft_split(s, c);
-	while (tab[i] != 0)
-	{
-		printf("%s\n", tab[i]);
-		i++;
-	}
-	return (0);
 }

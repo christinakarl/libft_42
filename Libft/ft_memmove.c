@@ -14,9 +14,9 @@
 
 void	*ft_memmove(void *str1, const void *str2, size_t n)
 {
-	size_t			i;
-	char			*s2;
-	char			*s1;
+	size_t	i;
+	char	*s2;
+	char	*s1;
 
 	s1 = (char *)str1;
 	s2 = (char *)str2;
@@ -30,7 +30,7 @@ void	*ft_memmove(void *str1, const void *str2, size_t n)
 		}
 	}
 	else
-	{	
+	{
 		while (i < n)
 		{
 			s1[i] = s2[i];
