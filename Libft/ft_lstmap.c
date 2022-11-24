@@ -14,19 +14,21 @@
 
 t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*bla;
+	t_list	*new;
+	t_list	*list;
 
-	if (!lst || !f)
-		return;
+	list = NULL;//so that lstadd_back puts new at the first place and works correctly
 	while (lst)
 	{
-		bla = (t_list *)malloc(sizeof(t_list));
-		if (!bla)
-			return (NULL)
-		f(lst->content);
-		bla = lst;
-		bla = bla->next;
-		lst = lst->next;
+		new = ft_lstnew(f(lst));
+		if (!new)
+		{
+			ft_lstclear(new, del);//puts lst = NULL, deletes all elements of the list
+			return (lst);
+		}
+		ft_lstadd_back(&list, new);//& because we need a double pointer
+		lst = lst->new;
 	}
-
+	return (list);
+	}
 }
