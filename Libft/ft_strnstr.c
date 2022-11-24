@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -19,8 +19,8 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 	char	*str1;
 	char	*to_find1;
 
-	to_find1 = (char*)to_find;
-	str1 = (char*)str;
+	to_find1 = (char *)to_find;
+	str1 = (char *)str;
 	i = 0;
 	j = 0;
 	if (to_find1[i] == '\0')
@@ -31,14 +31,11 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 		{
 			if (to_find1[j + 1] == '\0')
 				return (&str1[i - j]);
-			i++;
 			j++;
 		}
 		else
-		{
-			i++;
 			j = 0;
-		}
+		i++;
 	}
 	return (NULL);
 }
