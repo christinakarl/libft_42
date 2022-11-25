@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,10 +12,17 @@
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	if (!lst || !del)
-		return;
-	del(lst->content);
-	free(lst);
+	t_list	*hu;
+
+	if (!(*lst) || !del)
+		return ;
+	while (*lst)
+	{
+		hu = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		(*lst) = hu;
+	}
+	(*lst) = NULL;
 }

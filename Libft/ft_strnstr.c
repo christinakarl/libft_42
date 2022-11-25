@@ -29,13 +29,13 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 	{
 		if (str1[i] == to_find1[j])
 		{
-			if (to_find1[j + 1] == '\0')
-				return (&str1[i - j]);
-			j++;
+			while (str1[i + j] == to_find1[j] && to_find1[j] && (i + j) < len)
+				j++;
+			if (to_find1[j] == '\0')
+				return (&str1[i]);
 		}
-		else
-			j = 0;
+		j = 0;
 		i++;
 	}
-	return (NULL);
+	return (0);
 }

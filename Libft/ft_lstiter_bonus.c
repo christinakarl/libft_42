@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,13 +12,16 @@
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
+	t_list	*bla;
+
+	if (!lst || !f)
+		return ;
 	while (lst)
 	{
-		if (lst->next == NULL)
-			return (lst);
-		lst = lst->next;
+		bla = lst->next;
+		f(lst->content);
+		lst = bla;
 	}
-	return (lst);
 }

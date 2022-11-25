@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,16 +12,15 @@
 
 #include "libft.h"
 
-void ft_lstiter(t_list *lst, void (*f)(void *))
+int	ft_lstsize(t_list *lst)
 {
-	t_list	*bla;
+	int	i;
 
-	if (!lst || !f)
-		return;
+	i = 0;
 	while (lst)
 	{
-		bla = lst->next;
-		f(lst->content);
-		lst = bla;
+		lst = lst->next;
+		i++;
 	}
+	return (i);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,15 +12,10 @@
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	t_list	*copy;
-
-	copy = (t_list *)malloc(sizeof(t_list));
-	if (!copy)
-		return (NULL);
-	copy->content = content;
-	copy->next = NULL;
-
-	return (copy);
+	if (!lst || !del)
+		return ;
+	del(lst->content);
+	free(lst);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,23 +12,14 @@
 
 #include "libft.h"
 
-t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_list	*ft_lstnew(void *content)
 {
-	t_list	*new;
-	t_list	*list;
+	t_list	*copy;
 
-	list = NULL;//so that lstadd_back puts new at the first place and works correctly
-	while (lst)
-	{
-		new = ft_lstnew(f(lst));
-		if (!new)
-		{
-			ft_lstclear(new, del);//puts lst = NULL, deletes all elements of the list
-			return (lst);
-		}
-		ft_lstadd_back(&list, new);//& because we need a double pointer
-		lst = lst->new;
-	}
-	return (list);
-	}
+	copy = (t_list *)malloc(sizeof(*copy));
+	if (!copy)
+		return (NULL);
+	copy->content = content;
+	copy->next = NULL;
+	return (copy);
 }

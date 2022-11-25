@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,17 +12,22 @@
 
 #include "libft.h"
 
-void ft_lstclear(t_list **lst, void (*del)(void *))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*hu;
+	t_list	*new;
+	t_list	*list;
 
-	if (!*lst || !del)
-		return;
+	list = NULL;
 	while (lst)
 	{
-		hu = (*lst)->next;
-		ft_lstdelone(*lst,del);
-		*lst = hu;
+		new = ft_lstnew(f(lst->content));
+		if (!new)
+		{
+			ft_lstclear(&new, del);
+			return (list);
+		}
+		ft_lstadd_back(&list, new);
+		lst = lst->next;
 	}
-	*lst = NULL;
+	return (list);
 }

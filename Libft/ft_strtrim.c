@@ -60,6 +60,7 @@ int	ft_start(char const *s1, char const *set)
 		start++;
 	return (start);
 }
+
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		start;
@@ -67,11 +68,14 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char	*new;
 
 	new = NULL;
-	if (!s1 )
-		return (ft_strdup("")); //what about !set, look at paco again
+	if (!s1)
+		return (NULL);
+	if (!set)
+		return (ft_strdup(s1));
 	end = ft_end(s1, set);
 	start = ft_start(s1, set);
-	if (start < end)
-		new = ft_copy(s1, start, end);
+	if (start > end)
+		return (ft_strdup(""));
+	new = ft_copy(s1, start, end);
 	return (new);
 }
