@@ -1,44 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_put_di.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:38:30 by ckarl             #+#    #+#             */
-/*   Updated: 2022/10/27 17:12:36 by ckarl            ###   ########.fr       */
+/*   Updated: 2022/12/16 14:22:49 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-int	ft_printf(const char *print, ...)
+void	ft_put_di(int *put, int n)
 {
-	int			*put;
-	va_list		args;
-	int			len;
-	int			i;
-
-	i = 0;
-	len = 0;
-	/*put = (int *)malloc(sizeof(int));
-	if (!put)
-		return (-1); //or -1, TBD*/
-	put = &len;
-
-	va_start(args, print);
-	while (print[++i])
+	printf("%d\n", n);
+	if (n == -2147483648)
 	{
-		if (print[i] == '%')
-		{
-			print_decide(put, print[i + 1], args);
-		}
-		else
-			len += write(1, &print[i], 1);
+		put += write(1, "-", 1);
+		put += write(1, "2", 1);
+		n = 147483648;
 	}
-
-	va_end(args);
-	printf("%d\n", len);
-	return (len);
+	else if (n < 0)
+	{
+		put += write(1, "-", 1);
+		n = n * (-1);
+	}
+	while (n >= 10)
+	{
+		ft_put_c(put, (n % 10 + 48));
+		n = n / 10;
+	}
+	if (n < 10)
+		ft_put_c(put, (n + 48));
 }

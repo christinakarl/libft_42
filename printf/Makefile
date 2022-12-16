@@ -10,11 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS		= srcs/*.c
+SRCS		= print_decide.c ft_put_c.c ft_put_di.c ft_put_ptr.c ft_put_s.c ft_put_u.c ft_put_x.c ft_printf.c
 
 OBJS		= ${SRCS:.c=.o}
 
-HEADER		= includes/ftprintf.h includes/libft.h
+HEADER		= ft_printf.h
 
 NAME		= libftprintf.a
 

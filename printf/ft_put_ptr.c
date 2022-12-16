@@ -1,44 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_put_ptr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:38:30 by ckarl             #+#    #+#             */
-/*   Updated: 2022/10/27 17:12:36 by ckarl            ###   ########.fr       */
+/*   Updated: 2022/12/16 14:20:54 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-int	ft_printf(const char *print, ...)
+void	hex_ptr(int *put, unsigned long n)
 {
-	int			*put;
-	va_list		args;
-	int			len;
-	int			i;
-
-	i = 0;
-	len = 0;
-	/*put = (int *)malloc(sizeof(int));
-	if (!put)
-		return (-1); //or -1, TBD*/
-	put = &len;
-
-	va_start(args, print);
-	while (print[++i])
+	if (n >= 16)
 	{
-		if (print[i] == '%')
-		{
-			print_decide(put, print[i + 1], args);
-		}
-		else
-			len += write(1, &print[i], 1);
+		hex_ptr(put, (n / 16));
+		hex_ptr(put, (n % 16));
 	}
+	else
+	{
+		if (n <= 9)
+			ft_put_c(put, (n + 48));
+		else
+			ft_put_c(put, (n - 10 + 97));
+	}
+}
 
-	va_end(args);
-	printf("%d\n", len);
-	return (len);
+void	ft_put_ptr(int *put, unsigned long p)
+{
+	put += write(1, "0x", 2);
+	if (p == 0)
+		put += write(1, "0", 1);
+	hex_ptr(put, p);
 }
