@@ -5,7 +5,7 @@ OBJS		= ${SRCS:.c=.o}
 
 HEADER		= include/ft_printf.h
 
-NAME		= ft_printf.a
+NAME		= libftprintf.a
 
 CC			= gcc
 

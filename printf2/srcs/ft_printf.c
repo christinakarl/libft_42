@@ -22,7 +22,6 @@ int	ft_printf(const char *print, ...)
 	}
 
 	va_end(args);
-//	printf("%d\n", len);
 	return (len);
 }
 
@@ -45,6 +44,8 @@ int	print_decide(char const c, va_list args)
 		len += ft_put_unsign(va_arg(args, unsigned int));
 	else if (c == '%')
 		len += write(1, "%", 1);
+	else if (len == 0)
+		return (-1);
 	return (len);
 }
 

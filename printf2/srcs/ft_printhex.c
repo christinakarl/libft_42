@@ -5,6 +5,8 @@ int     ft_xlen(unsigned int n)
         int     len;
 
         len = 0;
+	if (n == 0)
+		return (1);
         while (n > 0)
         {
                 len++;

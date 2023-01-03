@@ -5,7 +5,9 @@ int     ft_ptrlen(unsigned long long n)
         int     len;
 
         len = 0;
-        while (n > 0)
+        if (n == 0)
+		return (1);
+	while (n > 0)
         {
                 len++;
                 n = n / 16;
