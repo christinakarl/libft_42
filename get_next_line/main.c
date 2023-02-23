@@ -18,13 +18,19 @@ int	main(void)
 {
 	int		fd;
 	char	*gnl;
-	
-	fd = open("text.txt", O_RDONLY);
-	gnl = get_next_line(fd);
-	printf("%s\n", gnl);
-	gnl = get_next_line(fd);
-	printf("%s\n", gnl);
-	free(gnl);
-	printf("%d\n", fd);
+
+/*1. call*/	fd = open("text.txt", O_RDONLY);
+			gnl = get_next_line(fd);
+			printf("%s\n", gnl);
+			free(gnl);
+
+/*2. call*/	gnl = get_next_line(fd);
+			printf("%s\n", gnl);
+			free(gnl);
+/*3. call*/	gnl = get_next_line(fd);
+			printf("%s\n", gnl);
+			free(gnl);
+	//printf("%d\n", fd);
+	close(fd);
 	return (0);
 }

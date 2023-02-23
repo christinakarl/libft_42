@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//add t_list *new to the end of linked list
+
 #include "libft.h"
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
