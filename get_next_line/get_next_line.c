@@ -6,115 +6,122 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 12:47:55 by ckarl             #+#    #+#             */
-/*   Updated: 2023/01/04 19:02:06 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/02/24 14:36:47 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-//fd = file descriptor returned by open()
 
-//check if string contains '\n'
-int	checkcont(char *str)
+//CHECK IF STRING (CONTENT) CONTAINS '\N'
+int	checkcont(c_list *list)
 {
-	int	i;
+	int		i;
+	c_list	*temp;
 
 	i = 0;
-	if (!str)
-		return (-1);
-	while (str[i])
+	if (!list)
+		return (0);
+	temp = ft_lstlast(list);
+	while (temp->content[i])
 	{
-		if (str[i] == '\n')
-			return (i);
+		if (temp->content[i] == '\n')
+			return (1);
 		i++;
 	}
-	return (-1);
+	return (0);
 }
 
-//add new item to linked list
-int	add_new(c_list *head, int fd)
+//FIND LAST ITEM OF LINKED LIST
+c_list	*ft_lstlast(c_list *lst)
 {
-	c_list	*temp;
-	c_list	*new;
+	c_list	*inter;
+
+	if (lst == NULL)
+		return (lst);
+	inter = lst;
+	while (inter->next != NULL)
+		inter = inter->next;
+	return (inter);
+}
+
+//ADD NEW ITEM AND ADD IT TO LINKED LIST
+void	ft_lstadd_back(c_list **lst, char *buf, int success)
+{
+	c_list	*addback;
+	c_list	*copy;
+	int		i;
+
+	i = 0;
+	addback = (c_list *)malloc(sizeof(c_list));
+	if (!addback)
+		return ;
+	addback->next = NULL;
+	addback->content = (char *)malloc(sizeof(char)*(success + 1));
+	if (addback->content == NULL)
+		return ;
+	while (buf[i] && i < success)
+	{
+		addback->content[i] = buf[i];
+		i++;	
+	}
+	addback->content[i] = '\0';
+	if (*lst == NULL)
+	{
+		*lst = addback;
+		return ;
+	}
+	copy = ft_lstlast(*lst);
+	copy->next = addback;
+}
+
+//CREATE LINKED LIST UNTIL ELEMENT CONTENT CONTAINS '\N'
+void	ft_getlist(c_list **lst, int fd)
+{
+	char	*buf;
 	int		success;
 
-	temp = head;
-
-	while (checkcont(temp->content) == -1) //check if \n is included in current content
+	success = -1;
+	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buf)
+		return ;
+	while (checkcont(*lst) == 0 && success != 0)
 	{
-		new = (c_list *)malloc(sizeof(new));									//leaking?
-		if (new == NULL)
-			return(-1);
-		new->content = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		if (new->content == NULL)
-			return(-1);
-		success = read(fd, new->content, BUFFER_SIZE);
-		(new->content)[success] = '\0';
-		new->next = NULL;
-		temp->next = new;
-		temp = temp->next;
+
+		success = read(fd, buf, BUFFER_SIZE);
+		if (success == -1)
+		{
+			free(buf);
+			return ;
+		}
+		buf[success] = '\0';
+		ft_lstadd_back(lst, buf, success);
 	}
-	free(temp);
-	return(success);
+	free(buf);
 }
 
-int	list_len(c_list *head)
-{
-	int	i;
-
-	i = 0;
-	while (head != 0)
-	{
-		i++;
-		head = head->next;
-	}
-	return (i);
-}
-
+//return the line to main
 char	*get_next_line(int fd)
 {
-	static c_list		*head;
-	c_list				*temp;
-	char				*final;
-	int					a;
-	int					b;
+	static c_list	*list;
+	char			*line;
 
-	a = 0;
-	head = (c_list *)malloc(sizeof(head));
-	if (head == NULL)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
 		return (NULL);
 
-	head->content = (char *)malloc(sizeof(char) * BUFFER_SIZE); //read first time
-	if (head == NULL)
-		return(NULL);
-	read(fd, head->content, BUFFER_SIZE);
-	head->next = NULL;
+	ft_getlist(&list, fd);
+	if (!list)
+		return (NULL);
 
-	add_new(head, fd);
-	temp = head;
+	ft_getline(&line, list);
 
-	printf("%d\n", list_len(head));
+	new_list(&list);
 
-	final = (char *)malloc(sizeof(char) * (BUFFER_SIZE * list_len(head) + 1));
-	if (final == 0)
-		return(NULL);
-
-	while (temp != 0)						//need to delete everything that was copied into final (including \n)
+	if (line[0] == '\0')
 	{
-		b = 0;
-		while (temp->content[b])
-		{
-			if (temp->content[b] == '\n')
-			{
-				final[a++] = temp->content[b];
-				break;
-			}
-			final[a++] = temp->content[b++];
-		}
-		temp = temp->next;
+		clear_list(&list);
+		free(line);
+		return (NULL);
 	}
-//	if (final[a - 1] != '\n')
-//		final[a++] = '\n';
-	final[a] = '\0';
-	free(temp);
-	return (final);
+	return (line);
 }
+
