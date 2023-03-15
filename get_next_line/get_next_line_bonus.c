@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 12:47:55 by ckarl             #+#    #+#             */
-/*   Updated: 2023/03/03 18:46:02 by ckarl            ###   ########.fr       */
+/*   Created: 2023/03/02 11:34:49 by ckarl             #+#    #+#             */
+/*   Updated: 2023/03/02 11:34:51 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 //CHECK IF STRING (CONTENT) CONTAINS '\N'
 int	checkcont(t_list *list)
@@ -98,25 +98,27 @@ void	ft_getlist(t_list **lst, int fd)
 	free(buf);
 }
 
-//return the line to main
+//return the line to main (possible from multiple fds)
 char	*get_next_line(int fd)
 {
-	static t_list	*list;
+	static t_list	*list[500];
 	char			*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
 	{
-		clear_list(&list);
+		if (fd >= 0)
+			clear_list(&list[fd]);
 		return (NULL);
 	}
-	ft_getlist(&list, fd);
-	if (!list)
+	ft_getlist(&list[fd], fd);
+	if (!list[fd])
 		return (NULL);
-	ft_getline(&line, list);
-	new_list(&list);
+	ft_getline(&line, list[fd]);
+	new_list(&list[fd]);
 	if (line[0] == '\0')
 	{
-		clear_list(&list);
+		if (fd >= 0)
+			clear_list(&list[fd]);
 		free(line);
 		return (NULL);
 	}

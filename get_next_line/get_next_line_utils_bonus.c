@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 12:47:55 by ckarl             #+#    #+#             */
-/*   Updated: 2023/03/03 18:45:47 by ckarl            ###   ########.fr       */
+/*   Created: 2023/03/02 11:51:45 by ckarl             #+#    #+#             */
+/*   Updated: 2023/03/02 11:51:47 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 //get size of linked list
 int	ft_lstsize(t_list *lst)

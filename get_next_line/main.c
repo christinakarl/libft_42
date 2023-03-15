@@ -1,23 +1,22 @@
-#include "get_next_line.h"
+//#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	main(void)
 {
-	int		fd;
+	int	fd1;
+	int	fd2;
 
-/*1. call*/	fd = open("text.txt", O_RDONLY);
-			printf("%s", get_next_line(fd));
-			//free(getline);
+	fd1 = open("text.txt", O_RDONLY);
+	printf("%s", get_next_line(fd1));
 
-/*2. call*/	printf("%s", get_next_line(fd));
+	fd2 = open("text2.txt", O_RDONLY);
+	printf("%s", get_next_line(fd2));
 
-/*3. call*/	printf("%s", get_next_line(fd));
-			
-		//	printf("%s\n", get_next_line(fd));
+	printf("%s", get_next_line(fd1));
+	printf("%s", get_next_line(fd1));
 
-		//	printf("%s\n", get_next_line(fd));
+	close(fd1);
+	close(fd2);
 
-//			free(gnl);
-	//printf("%d\n", fd);
-	close(fd);
 	return (0);
 }
