@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckarl <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 12:26:53 by ckarl             #+#    #+#             */
-/*   Updated: 2023/06/23 12:26:55 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/06/28 15:01:22 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,14 @@
 # include "libs/ftprintf/ft_printf_utils.h"
 # include "libs/libft/libft.h"
 
-void	cmd_echo(char **cmd, char *option);
-void	cmd_cd(char *to_go_path);
-int		main(void);
+int			main(void);
+void		cmd_echo(char **cmd, char *option);
+void		cmd_cd(char *to_go_path);
+void		cmd_pwd(void);;
+static void	*cmd_export(void *var);
+void		cmd_unset(void *var);
+void		cmd_env(char **env);
+void		cmd_exit(int status);
 
 
 

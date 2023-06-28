@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_ins.c                                        :+:      :+:    :+:   */
+/*   built-in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/06/22 16:31:20 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/06/28 16:06:22 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+
+
+//ECHO WITH OPTION -N
 /*The echo utility writes any specified operands, separated by single blank (` ')
 characters and followed by a newline (`\n') character, to the standard output.
--n option: Do not print the trailing newline character. This may also be achieved
-by appending `\c' to the end of the string, as is done by iBCS2 compatible systems.*/
+-n option: Do not print the trailing newline character.*/
 void	cmd_echo(char **cmd, char *option)
 {
 	while (*cmd)
@@ -28,12 +30,16 @@ void	cmd_echo(char **cmd, char *option)
 	}
 }
 
-/*cd with only a relative or absolute path*/
+//CD WITH ONLY A RELATIVE OR ABSOLUTE PATH
+/*The cd command in Linux is known as the change directory command.
+It is used to move efficiently from the current working
+directory to different directories in our System.*/
 void	cmd_cd(char *to_go_path)
 {
 	chdir(to_go_path);
 }
 
+//PWD WITH NO OPTIONS
 /*The pwd utility writes the absolute pathname of the current working directory
 to the standard output.*/
 void	cmd_pwd(void)
@@ -41,18 +47,30 @@ void	cmd_pwd(void)
 	ft_printf("%s\n", getcwd(NULL, 0));
 }
 
-/**/
-void	cmd_export()
+//EXPORT WITH NO OPTIONS
+/*Normally, when you run a command at the bash prompt, a dedicated process is						needs more work, maybe global var?
+created with its own environment, exclusively for running your command. Any
+variables and functions you defined before running the command are not shared
+with new processes — unless you explicitly mark them with export.
+Example: myvar="This variable is defined." > export myvar > bash > echo $myvar >
+"This variable is defined."*/
+static void	*cmd_export(void *var)
 {
+	static void	*export_var;
 
+	export_var = var;
+	return (export_var);
 }
 
-/**/
-void	cmd_unset()
+//UNSET WITH NO OPTIONS
+/*Using the unset command, you can unset values and attributes of shell
+variables.*/
+void	cmd_unset(void *var)
 {
-
+	var = NULL;
 }
 
+//ENV WITH NO OPTIONS OR ARGUMENTS
 /*If no utility is specified, env prints out the names and values
 of the variables in the environment, with one name/value pair per line.*/
 void	cmd_env(char **env)
@@ -64,10 +82,13 @@ void	cmd_env(char **env)
 	}
 }
 
-/**/
-void	cmd_exit()
+//EXIT WITH NO OPTIONS
+/*The exit() function causes normal process termination and the
+least significant byte of status (i.e., status & 0xFF) is
+returned to the parent (see wait(2)).*/
+void	cmd_exit(int status)
 {
-
+	exit(status);
 }
 
 
