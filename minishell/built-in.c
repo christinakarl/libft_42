@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/06/28 16:06:22 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/06/28 16:12:00 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,9 @@ variables and functions you defined before running the command are not shared
 with new processes — unless you explicitly mark them with export.
 Example: myvar="This variable is defined." > export myvar > bash > echo $myvar >
 "This variable is defined."*/
-static void	*cmd_export(void *var)
+void	cmd_export(void *var)
 {
-	static void	*export_var;
-
-	export_var = var;
-	return (export_var);
+	//need to add *var to env tableau
 }
 
 //UNSET WITH NO OPTIONS
