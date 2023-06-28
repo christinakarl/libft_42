@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/06/28 16:12:00 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/06/28 16:29:19 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	cmd_export(void *var)
 }
 
 //UNSET WITH NO OPTIONS
-/*Using the unset command, you can unset values and attributes of shell
+/*Using the unset command, you can unset values and attributes of shell								need to take it out of env table
 variables.*/
 void	cmd_unset(void *var)
 {
