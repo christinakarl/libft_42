@@ -20,6 +20,7 @@ int	main(int ac, char **av, char **envp)
 	if (ac < 5)
 		return (msg(ERR_INPUT));
 	pipex = malloc(sizeof(t_pipex));
+	init_pipex(ac, av, pipex);
 	path_dirs = get_path_dir(envp);
 	while (pipex->idx < pipex->count_cmds)
 	{

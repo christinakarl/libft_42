@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+         #
+#    By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 15:18:42 by nvaubien          #+#    #+#              #
-#    Updated: 2023/06/23 15:44:16 by ckarl            ###   ########.fr        #
+#    Updated: 2023/05/23 20:21:07 by nvaubien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ LIB_DIRECTORY			:= ../libs/
 LIBFT					:= $(LIBFT_DIRECTORY)libft.a
 LIBFT_DIRECTORY			:= $(LIB_DIRECTORY)libft/
 
-LIBPRINTF				:= $(LIBPRINTF_DIRECTORY)libftprintf.a #../libs/libftprinf/libftprintf.a
-LIBPRINTF_DIRECTORY		:= $(LIB_DIRECTORY)ftprintf/ #../libs/ftprintf
+LIBPRINTF				:= $(LIBPRINTF_DIRECTORY)libftprintf.a # /libs/libftprinf/libftprintf.a
+LIBPRINTF_DIRECTORY		:= $(LIB_DIRECTORY)ftprintf/ #/libs/ftprintf
 
 SOURCES_DIRECTORY		:= ./srcs/
 
@@ -64,7 +64,7 @@ $(LIBPRINTF):
 	cp ../libs/ftprintf/libftprintf.a .
 
 $(NAME): $(LIBFT) $(LIBPRINTF) $(OBJECTS_DIRECTORY) $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) -L$(LIBPRINTF_DIRECTORY) -lftprintf -L$(LIBFT_DIRECTORY) -lft -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJECTS) -L../libs/ftprintf -lftprintf -L../libs/libft -lft -o $(NAME)
 
 
 SOURCES_DIRECTORY_BONUS		:= ./srcs_bonus/
@@ -95,13 +95,19 @@ $(OBJECTS_DIRECTORY_BONUS)%.o : $(SOURCES_DIRECTORY_BONUS)%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BONUS_NAME): $(LIBFT) $(LIBPRINTF) $(OBJECTS_DIRECTORY_BONUS) $(OBJECTS_BONUS)
-	$(CC) $(CFLAGS) $(OBJECTS_BONUS) -Llibs/ftprintf -lftprintf -Llibs/libft -lft -o $(BONUS_NAME)
+	$(CC) $(CFLAGS) $(OBJECTS_BONUS) -L../libs/ftprintf -lftprintf -L../libs/libft -lft -o $(BONUS_NAME)
 
 clean:
+	$(MAKE) -sC $(LIBPRINTF_DIRECTORY) clean
+	$(MAKE) -sC $(LIBFT_DIRECTORY) clean
 	rm -rf $(OBJECTS_DIRECTORY)
 	rm -rf $(OBJECTS_DIRECTORY_BONUS)
 
 fclean: clean
+	$(MAKE) -sC $(LIBFT_DIRECTORY) fclean
+	$(MAKE) -sC $(LIBPRINTF_DIRECTORY) fclean
+	rm -f libft.a
+	rm -f libftprintf.a
 	rm -f $(NAME)
 	rm -f $(BONUS_NAME)
 

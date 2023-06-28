@@ -23,8 +23,8 @@
 
 # include <string.h>
 
-# include "libs/libft/libft.h"
-# include "libs/ftprintf/ft_printf.h"
+# include "../libs/libft/libft.h"
+# include "../libs/ftprintf/ft_printf.h"
 
 # define ERR_INFILE "Infile"
 # define ERR_OUTFILE "Outfile"

@@ -10,13 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			= main.c
+SRCS			= built-in.c main.c
 
 OBJS			= ${SRCS:.c=.o}
 
 HEADER  		= minishell.h
 
-LIBS			= -Llibs/libft -lft -Llibs/ftprintf -lftprintf
+LIBS			= -Llibs/ftprintf -lftprintf -Llibs/libft -lft
 
 OTH_HEAD		= -Ilibft -Ift_printf
 
@@ -43,21 +43,22 @@ COLOUR_END		=\033[0m
 all:			${NAME}
 
 ${NAME}:		${OBJS}
-				cd libs/libft; make all
+				cd libs/libft; make bonus
 				cd libs/ftprintf; make all
-				${CC} ${CFLAGS} -o $@ ${OBJS} ${LIBS} ${OTH_HEAD}
-				cd pipex; make all
-				@echo "$(COLOUR_GREEN)( ಠ ͜ʖ ಠ )$(COLOUR_END)"
+				cd pipex; make bonus
+				${CC} ${CFLAGS} ${LIBS} ${OTH_HEAD} -o $@ ${OBJS}
 
 clean:
 				${RM} ${OBJS}
 				cd libs/libft; make clean
 				cd libs/ftprintf; make clean
+				cd pipex; make clean
 
 fclean:			clean
 				${RM} ${NAME}
 				cd libs/libft; make fclean
 				cd libs/ftprintf; make fclean
+				cd pipex; make fclean
 				@echo "$(COLOUR_VIO)All clean!$(COLOUR_END)"
 
 re:				fclean all
