@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:39:00 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/05/24 16:55:41 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/06/29 14:00:13 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ typedef struct s_command_store_helper
 	int		j;
 	int		k;
 }	t_command_store_helper;
+
+typedef struct	s_chevron
+{
+	int	single_in;
+	int	double_in;
+	int	single_out;
+	int	double_out;
+}	t_chevron;
 
 typedef struct s_parsing
 {

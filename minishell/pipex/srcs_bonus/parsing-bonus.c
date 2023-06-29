@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing-bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:46:18 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/05/22 16:35:00 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/06/29 13:48:13 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex_bonus.h"
 
+//create as many pipes as necessary
 void	create_pipes(t_pipex *pipex)
 {
 	int	i;
@@ -24,6 +25,7 @@ void	create_pipes(t_pipex *pipex)
 	}
 }
 
+//init all fields of the t_pipex structure
 void	init_pipex(int ac, char **av, t_pipex *pipex)
 {
 	t_list_pipex	*cmds;
@@ -45,28 +47,24 @@ void	init_pipex(int ac, char **av, t_pipex *pipex)
 	create_pipes(pipex);
 }
 
+//get the PATH from env as a char **
 char	**get_path_dir(char **envp)
 {
 	char	*path;
 	char	**path_dirs;
-	int		i;
 
-	i = 0;
-	path_dirs = NULL;
-	while (envp[i])
+	while (*envp)
 	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-		{
-			path = envp[i] + 5;
-			path_dirs = ft_split(path, ':');
-			if (!path_dirs)
-			{
-				perror("error");
-				exit(1);
-			}
-			break ;
-		}
-		i++;
+		if (ft_strncmp(*envp, "PATH", 4) == 0)
+			path = *envp;
+		envp++;
+	}
+	path_dirs = ft_split((path + 5), ':');
+	if (!path_dirs)
+	{
+		perror("error");
+		exit(1);
 	}
 	return (path_dirs);
 }
+

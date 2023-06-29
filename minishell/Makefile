@@ -6,17 +6,19 @@
 #    By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 12:26:42 by ckarl             #+#    #+#              #
-#    Updated: 2023/06/23 15:26:44 by ckarl            ###   ########.fr        #
+#    Updated: 2023/06/29 18:50:52 by ckarl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			= built-in.c main.c
+SRCS			= main.c built-in_others.c built-in_env.c list_helpers.c \
+				list_helpers2.c bubble_sort.c
 
 OBJS			= ${SRCS:.c=.o}
 
 HEADER  		= minishell.h
 
-LIBS			= -Llibs/ftprintf -lftprintf -Llibs/libft -lft
+LIBS			= -Llibs/ftprintf -lftprintf -Llibs/libft -lft \
+					-L/Users/ckarl/homebrew/Cellar/readline/8.2.1/lib -lreadline
 
 OTH_HEAD		= -Ilibft -Ift_printf
 
@@ -50,15 +52,15 @@ ${NAME}:		${OBJS}
 
 clean:
 				${RM} ${OBJS}
-				cd libs/libft; make clean
-				cd libs/ftprintf; make clean
-				cd pipex; make clean
+				# cd libs/libft; make clean
+				# cd libs/ftprintf; make clean
+				# cd pipex; make clean
 
 fclean:			clean
 				${RM} ${NAME}
-				cd libs/libft; make fclean
-				cd libs/ftprintf; make fclean
-				cd pipex; make fclean
+				# cd libs/libft; make fclean
+				# cd libs/ftprintf; make fclean
+				# cd pipex; make fclean
 				@echo "$(COLOUR_VIO)All clean!$(COLOUR_END)"
 
 re:				fclean all

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper-init-bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:35:29 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/05/24 17:16:54 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/06/29 12:21:19 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,11 @@ t_list_pipex	*parse_cmds(int ac, char **av)
 	{
 		if (head == NULL)
 		{
-			head = insert_at_tail(head, ft_substr(av[i], 0, ft_strlen(av[i])));
+			head = insert_at_tail(head, av[i]);
 			tail = head;
 		}
 		else
-		{
-			tail = insert_at_tail(tail, ft_substr(av[i], 0, ft_strlen(av[i])));
-		}
+			tail = insert_at_tail(tail, av[i]);
 		i++;
 	}
 	return (head);
@@ -85,7 +83,7 @@ char	***allocate_storage(t_list_pipex *cmds)
 	char	***storage;
 
 	i = count_nodes(cmds);
-	storage = malloc(sizeof(char **) * i + 1);
+	storage = malloc(sizeof(char **) * (i + 1));
 	if (!storage)
 		return (NULL);
 	return (storage);

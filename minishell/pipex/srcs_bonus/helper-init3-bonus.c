@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   helper-init3-bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:38:05 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/05/23 01:49:46 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/06/29 13:38:49 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex_bonus.h"
 
+// ???
 char	**init_fields(t_list_pipex *cmds, t_parsing *h, char ***s, int i)
 {
 	s[i] = malloc(sizeof(char *) * c_fields(cmds->value, h) + 1);
@@ -20,6 +21,7 @@ char	**init_fields(t_list_pipex *cmds, t_parsing *h, char ***s, int i)
 	return (s[i]);
 }
 
+// ???
 void	update_command_list(t_command_store_helper *s,
 	char ***to_exec, t_list_pipex **cmds)
 {
@@ -28,6 +30,7 @@ void	update_command_list(t_command_store_helper *s,
 	*cmds = (*cmds)->next;
 }
 
+// ???
 void	assign_to_exec(t_command_store_helper *s, char ***to_exec,
 	t_list_pipex *cmds, t_parsing *h)
 {

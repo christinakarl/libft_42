@@ -6,16 +6,20 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/06/28 13:28:00 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/06/29 17:36:58 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
-	cmd_cd("/Users/Tina/Desktop/ecole42/pipex");
-	ft_printf("%s\n", getcwd(NULL, 0));
+	(void)	argc;
+	(void)	argv;
+	char	*read;
+
+	read = readline("minishell> ");
+	print_env(env);
 
 
 	return (0);

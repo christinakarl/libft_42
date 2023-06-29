@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 12:26:53 by ckarl             #+#    #+#             */
-/*   Updated: 2023/06/28 15:01:22 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/06/29 18:57:35 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,38 @@
 # include <sys/wait.h>
 # include "libs/ftprintf/ft_printf_utils.h"
 # include "libs/libft/libft.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 
-int			main(void);
+typedef struct	s_env_list
+{
+	char				*element;
+	struct s_env_list	*prev;
+	struct s_env_list	*next;
+
+}	t_env_list;
+
+
 void		cmd_echo(char **cmd, char *option);
 void		cmd_cd(char *to_go_path);
 void		cmd_pwd(void);;
-static void	*cmd_export(void *var);
+void		cmd_export(void *var);
 void		cmd_unset(void *var);
-void		cmd_env(char **env);
+void		print_env(char **env);
 void		cmd_exit(int status);
 
+/* linked list */
+int			list_size(t_env_list *lst);
+t_env_list	*last_node(t_env_list *lst);
+t_env_list	*first_node(t_env_list *lst);
+t_env_list	*get_node(t_env_list *head, int index);
+t_env_list	*new_env_list(char **tab);
+void		list_append(t_env_list **lst, char *element);
 
+/* built-in: export */
+void		content_swap(t_env_list *one, t_env_list *two);
+void		bubble_sort(t_env_list **head);
+void		print_ascii_env(char **copy_env);
 
 
 

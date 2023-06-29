@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper-init2-bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvaubien <nvaubien@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:37:25 by nvaubien          #+#    #+#             */
-/*   Updated: 2023/05/23 01:48:51 by nvaubien         ###   ########.fr       */
+/*   Updated: 2023/06/29 15:24:22 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,18 @@ void	process_in_field(t_parsing *h)
 	}
 }
 
+//check cmd for single or double quotes
 int	c_fields(char *s, t_parsing *h)
 {
 	init_helper(h);
 	while (*s)
 	{
 		if (*s == h->is_d_quotes || *s == h->is_s_quotes)
-		{
 			process_found_quote(s, h);
-		}
 		else if (*s != h->is_space && h->flag == 0)
-		{
 			process_in_field(h);
-		}
 		else if (h->flag == 0)
-		{
 			h->in_field = 0;
-		}
 		s++;
 	}
 	return (h->count);
