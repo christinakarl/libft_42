@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:04:19 by ckarl             #+#    #+#             */
-/*   Updated: 2023/06/29 18:58:22 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/06/30 12:59:57 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void	list_append(t_env_list **lst, char *element)
 	if (!addback)
 		return ;
 	addback->next = NULL;
-	addback->element = element;
+	addback->element = ft_strdup(element);
+	if (!addback->element)
+		return ;
 	if (*lst == NULL)
 	{
 		*lst = addback;
@@ -37,6 +39,20 @@ void	list_append(t_env_list **lst, char *element)
 	addback->prev = copy;
 }
 
+// //detach last element from list
+// void	list_detach(t_env_list **lst)
+// {
+// 	t_env_list	*last;
+
+// 	last = last_node(*lst);
+// 	while ((*lst)->next)
+// 		*lst = (*lst)->next;
+// 	(*lst)->next = NULL;
+// 	last->prev = NULL;
+// 	free(last->element);
+// 	free(last);
+// }
+
 //create a new list out of parameter **tab, check **tab for errors
 t_env_list	*new_env_list(char **tab)
 {
@@ -45,12 +61,9 @@ t_env_list	*new_env_list(char **tab)
 
 	a = 0;
 	new_list = NULL;
-	while (tab[a])
+	while (tab[a + 1])
 	{
-		if (tab[a + 1] == NULL)
-			list_append(&new_list, "_=/usr/bin/env");
-		else
-			list_append(&new_list, tab[a]);
+		list_append(&new_list, tab[a]);
 		a++;
 	}
 	return (new_list);

@@ -6,12 +6,12 @@
 #    By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/23 12:26:42 by ckarl             #+#    #+#              #
-#    Updated: 2023/06/29 18:50:52 by ckarl            ###   ########.fr        #
+#    Updated: 2023/06/30 14:41:45 by ckarl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			= main.c built-in_others.c built-in_env.c list_helpers.c \
-				list_helpers2.c bubble_sort.c
+SRCS			= main.c ck_builtin_others.c ck_builtin_env.c ck_list_helpers.c \
+				ck_list_helpers2.c ck_builtin_export.c
 
 OBJS			= ${SRCS:.c=.o}
 
