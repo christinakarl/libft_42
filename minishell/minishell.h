@@ -42,10 +42,12 @@ typedef struct	s_global
 void		cmd_echo(char **cmd, char *option);
 void		cmd_cd(char *to_go_path);
 void		cmd_pwd(void);;
-void		cmd_export(void *var);
-void		cmd_unset(void *var);
-void		print_env(t_env_list *copy_env);
+void		cmd_unset(void *var, t_env_list **head);
 void		cmd_exit(int status);
+
+/* builtin: env*/
+int			find_c(char *str, char c);
+void		print_env(t_env_list *copy_env);
 
 /* linked list */
 int			list_size(t_env_list *lst);
@@ -56,10 +58,12 @@ t_env_list	*new_env_list(char **tab);
 void		list_append(t_env_list **lst, char *element);
 // void		list_detach(t_env_list **lst);
 
-/* built-in: export */
+/* builtin: export */
 void		content_swap(t_env_list *one, t_env_list *two);
 void		bubble_sort(t_env_list **head);
+int			check_var(void *var);
 void		print_export(t_env_list *ascii_env);
+void		add_var_export(void *var, t_env_list **head);
 
 
 

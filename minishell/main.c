@@ -21,7 +21,10 @@ int	main(int argc, char **argv, char **env)
 
 	// read = readline("minishell> ");
 	global.copy_env = new_env_list(env);
-	print_env(global.copy_env);
+	// print_env(global.copy_env);
+	add_var_export("myvar=$$mhallo", &global.copy_env);
+	print_export(global.copy_env);
+	cmd_unset("myvar=$$mhallo", &global.copy_env);
 	printf("\n\n");
 	print_export(global.copy_env);
 

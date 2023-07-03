@@ -47,13 +47,29 @@ void	cmd_pwd(void)
 }
 
 //UNSET WITH NO OPTIONS
-/*Using the unset command, you can unset values and attributes of shell								need to take it out of env table
+/*Using the unset command, you can unset values and attributes of shell
 variables.*/
-void	cmd_unset(void *var)
+void	cmd_unset(void *var, t_env_list **head)
 {
-	var = NULL;
-}
+	t_env_list	*list;
+	t_env_list	*pre_copy;
+	t_env_list	*post_copy;
 
+	list = *head;
+	while (list)
+	{
+		if (ft_strncmp(list->element, var, 100) == 0)
+		{
+			pre_copy = list->prev;
+			post_copy = list->next;
+			pre_copy->next = post_copy;
+			post_copy->prev = pre_copy;
+			free(list->element);
+			free(list);
+		}
+		list = list->next;
+	}
+}
 
 //EXIT WITH NO OPTIONS
 /*The exit() function causes normal process termination and the

@@ -16,31 +16,24 @@
 /*If no utility is specified, env prints out the names and values
 of the variables in the environment, with one name/value pair per line.*/
 
-// char	**duplicate_env(char **env)
-// {
-// 	t_env_list	**copy;
-// 	int		i;
+//find character c in string s, similar to ft_strchr
+int	find_c(char *str, char c)
+{
+	while (*str)
+	{
+		if (*str == c)
+			return (1);
+		str++;
+	}
+	return (0);
+}
 
-// 	i = 0;
-// 	copy = (char **)malloc(sizeof(*copy) * (tab_len(env) + 1));
-// 	if (!copy)
-// 		return (NULL);
-// 	while (env[i])
-// 	{
-// 		copy[i] = ft_strdup(env[i]);
-// 		i++;
-// 	}
-// 	copy[i] = 0;
-// 	return (copy);
-// }
-
-
-
+//print environment when command env is called
 void	print_env(t_env_list *copy_env)
 {
 	while (copy_env)
 	{
-		if (ft_strncmp(copy_env->element, "=", 100))			//if var is undefined, it should not be printed
+		if (find_c(copy_env->element, '='))			//if var is undefined, it should not be printed
 			ft_printf("%s\n", copy_env->element);
 		copy_env = copy_env->next;
 	}

@@ -19,10 +19,48 @@ variables and functions you defined before running the command are not shared
 with new processes — unless you explicitly mark them with export.
 Example: myvar="This variable is defined." > export myvar > bash > echo $myvar >
 "This variable is defined."*/
-void	cmd_export(void *var)
+
+//check if var is in allowed format (no #, $ or @ in name, starts with letter or _)
+int	check_var(void *var)
 {
-	(void) *var;
-	//need to add *var to env tableau
+	int		i;
+	char	*copy;
+
+	i = 0;
+	copy = (char *)var;
+	if (((copy[0] > 'Z' && copy[0] < 'a') || copy[0] < 'A'
+		|| copy[0] > 'z') && copy[0] != '_')
+			return (-1);
+	while (copy[i] != '=' && copy[i])
+	{
+		if (copy[i] == '#' || copy[i] == '@' || copy[i] == '$')
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
+//add *var to env tableau
+void	add_var_export(void *var, t_env_list **head)
+{
+	t_env_list	*addback;
+	t_env_list	*pre_copy;
+	t_env_list	*post_copy;
+
+	if (check_var(var) == -1)
+		return (perror("not added\n"));								//include error msg here (bash: export: `=1': not a valid identifier)
+	addback = (t_env_list *)malloc(sizeof(t_env_list));
+	if (!addback)													//include error msg here
+		return ;
+	addback->element = ft_strdup(var);
+	if (!addback->element)											//include error msg here
+		return ;
+	pre_copy = get_node(*head, 10);
+	post_copy = pre_copy->next;
+	pre_copy->next = addback;
+	post_copy->prev = addback;
+	addback->prev = pre_copy;
+	addback->next = post_copy;
 }
 
 //cmd: export (without args), prints env in ascii order without the last arg path
@@ -34,55 +72,16 @@ void	print_export(t_env_list *env_for_export)
 	bubble_sort(&env_for_export);
 	while (env_for_export)
 	{
-		lines = (char **)malloc(sizeof(char *) * 3);
-		if (!lines)
-			return ;												//include error msg here
 		lines = ft_split(env_for_export->element, '=');
 		if (!lines)
 			return ;												//include error msg here
-		ft_printf("declare -x %s=%c%s%c\n", lines[0], '"', lines[1], '"');
+		ft_printf("declare -x %s=%c", lines[0], '"');
+		if (lines[1])
+			ft_printf("%s", lines[1]);
+		ft_printf("%c\n", '"');
 		env_for_export = env_for_export->next;
 		free(lines[0]);
 		free(lines[1]);
 		free(lines);
 	}
 }
-
-//bubble sort helper, swaps content of two nodes
-void	content_swap(t_env_list *one, t_env_list *two)
-{
-	t_env_list	*temp;
-
-	temp = (t_env_list *)malloc(sizeof(t_env_list));
-	if (!temp)
-		return ;
-	temp->element = one->element;
-	one->element = two->element;
-	two->element = temp->element;
-	free(temp);
-}
-
-//sorts a linked list in ascending order
-void	bubble_sort(t_env_list **head)
-{
-	t_env_list	*a;
-	t_env_list	*b;
-	int		i;
-	int		x;
-
-	i = 0;
-	while (i < list_size(*head))
-	{
-		a = get_node(*head, i);
-		x = i + 1;
-		while (x < list_size(*head))
-		{
-			b = get_node(*head, x);
-			if (a->element[0] > b->element[0])
-				content_swap(a, b);
-			x++;
-		}
-		i++;
-	}
-}
-
