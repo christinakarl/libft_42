@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/05 17:35:09 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/05 18:00:08 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char	*trim_front(void *str, char sep)
 {
 	char	**copy;
 	char	*trimmed;
-	int		len;
 	int		x;
 
 	if (find_c(str, sep) == 0)
@@ -41,16 +40,36 @@ char	*trim_front(void *str, char sep)
 	return (trimmed);
 }
 
+//get variable value from env
+char	*get_value(t_env_list *env, void *var)
+{
+	char	*value;
+	int		len;
+
+	len = ft_strlen((char *)var);
+	while (env)
+	{
+		if (ft_strncmp(env->element, var, len) == 0)
+			value = env->element;
+		env = env->next;
+	}
+	return (value + len + 1);
+}
+
 /*check if var is in env table, if yes, need to print its value and not the var name,
 check quotes ('$USER' should output $USER), inner and outer*/
 void	cmd_echo(char **cmd, char *option, t_env_list *head, bool single_quotes, bool double_quotes)
 {
 	char	*print;
+	char	*real_var;
+	(void)	single_quotes;
+	(void)	double_quotes;
 
 	while (*cmd)
 	{
-		if (existing_var_in_env(*cmd, head) == true)			//need to check if $ is present, if yes trim it to find it in env and then print only value found in env
-			print = trim_front(*cmd, '=');
+		real_var = trim_front(*cmd, '$');
+		if (existing_var_in_env(real_var, head) == true)			//need to check if $ is present, if yes trim it to find it in env and then print only value found in env
+			print = trim_front(real_var, '=');
 		else
 			print = ft_strdup(*cmd);
 		if (ft_strncmp(option, "-n", 2) == 0)

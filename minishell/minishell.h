@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 12:26:53 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/05 17:10:41 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/05 18:00:26 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct	s_global
 
 
 void		cmd_echo(char **cmd, char *option, t_env_list *head, bool single_quotes, bool double_quotes);
+char		*get_value(t_env_list *env, void *var);
+char		*trim_front(void *str, char sep);
 void		cmd_cd(char *to_go_path);
 void		cmd_pwd(void);;
 void		cmd_unset(void *var, t_env_list **head);
