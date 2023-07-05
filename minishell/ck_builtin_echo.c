@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/07/05 18:00:08 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/05 18:04:42 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*get_value(t_env_list *env, void *var)
 
 /*check if var is in env table, if yes, need to print its value and not the var name,
 check quotes ('$USER' should output $USER), inner and outer*/
-void	cmd_echo(char **cmd, char *option, t_env_list *head, bool single_quotes, bool double_quotes)
+void	cmd_echo(char **cmd, char *option, t_env_list *head, bool single_quotes, bool double_quotes)			//gives seg fault check why
 {
 	char	*print;
 	char	*real_var;
