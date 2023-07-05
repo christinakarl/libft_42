@@ -6,7 +6,7 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 12:26:53 by ckarl             #+#    #+#             */
-/*   Updated: 2023/06/30 14:40:08 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/05 17:10:41 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+#include <stdbool.h>
 # include "libs/ftprintf/ft_printf_utils.h"
 # include "libs/libft/libft.h"
 #include <readline/readline.h>
@@ -39,7 +40,7 @@ typedef struct	s_global
 }	t_global;
 
 
-void		cmd_echo(char **cmd, char *option);
+void		cmd_echo(char **cmd, char *option, t_env_list *head, bool single_quotes, bool double_quotes);
 void		cmd_cd(char *to_go_path);
 void		cmd_pwd(void);;
 void		cmd_unset(void *var, t_env_list **head);
@@ -61,9 +62,12 @@ void		list_append(t_env_list **lst, char *element);
 /* builtin: export */
 void		content_swap(t_env_list *one, t_env_list *two);
 void		bubble_sort(t_env_list **head);
-int			check_var(void *var);
+int			check_var_format(void *var);
+bool		existing_var_in_env(void *var, t_env_list *head);
+char		*trim_back(void *var);
 void		print_export(t_env_list *ascii_env);
 void		add_var_export(void *var, t_env_list **head);
+
 
 
 

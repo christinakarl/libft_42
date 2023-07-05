@@ -6,28 +6,11 @@
 /*   By: ckarl <ckarl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:38:36 by ckarl             #+#    #+#             */
-/*   Updated: 2023/06/30 15:26:44 by ckarl            ###   ########.fr       */
+/*   Updated: 2023/07/05 17:08:20 by ckarl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//ECHO WITH OPTION -N
-/*The echo utility writes any specified operands, separated by single blank (` ')
-characters and followed by a newline (`\n') character, to the standard output.
--n option: Do not print the trailing newline character.*/
-void	cmd_echo(char **cmd, char *option)
-{
-	//check if var is in env table, if yes, need to print its value and not the var name
-	while (*cmd)
-	{
-		if (ft_strncmp(option, "-n", 2) == 0)
-			ft_printf("%s", *cmd);
-		else
-			ft_printf("%s\n", *cmd);
-		cmd++;
-	}
-}
 
 //CD WITH ONLY A RELATIVE OR ABSOLUTE PATH
 /*The cd command in Linux is known as the change directory command.
@@ -54,16 +37,20 @@ void	cmd_unset(void *var, t_env_list **head)
 	t_env_list	*list;
 	t_env_list	*pre_copy;
 	t_env_list	*post_copy;
+	int			len;
 
+	len = ft_strlen(var);
 	list = *head;
 	while (list)
 	{
-		if (ft_strncmp(list->element, var, 100) == 0)
+		if (ft_strncmp(list->element, var, len) == 0)
 		{
 			pre_copy = list->prev;
 			post_copy = list->next;
-			pre_copy->next = post_copy;
-			post_copy->prev = pre_copy;
+			if (pre_copy)
+				pre_copy->next = post_copy;
+			if (post_copy)
+				post_copy->prev = pre_copy;
 			free(list->element);
 			free(list);
 		}
