@@ -19,11 +19,12 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-#include <stdbool.h>
+# include <stdbool.h>
+# include <errno.h>
 # include "libs/ftprintf/ft_printf_utils.h"
 # include "libs/libft/libft.h"
-#include <readline/readline.h>
-#include <readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct	s_env_list
 {
@@ -36,21 +37,24 @@ typedef struct	s_env_list
 typedef struct	s_global
 {
 	t_env_list			*copy_env;
-
+	int					exit_status;
 }	t_global;
 
+/* builtin_decide.c */
+int		builtin_check(char *cmd);
+void	builtin_redirect(t_global *global, char *cmd, char *var);
 
-void		cmd_echo(char **cmd, char *option, t_env_list *head, bool single_quotes, bool double_quotes);
+
+int			cmd_echo(char **cmd, char *option, t_env_list *head, bool single_quotes, bool double_quotes);
 char		*get_value(t_env_list *env, void *var);
-char		*trim_front(void *str, char sep);
-void		cmd_cd(char *to_go_path);
-void		cmd_pwd(void);;
-void		cmd_unset(void *var, t_env_list **head);
+int			cmd_cd(char *to_go_path);
+int			cmd_pwd(void);;
+int			cmd_unset(void *var, t_env_list **head);
 void		cmd_exit(int status);
 
 /* builtin: env*/
 int			find_c(char *str, char c);
-void		print_env(t_env_list *copy_env);
+int			print_env(t_env_list *copy_env);
 
 /* linked list */
 int			list_size(t_env_list *lst);
@@ -59,16 +63,15 @@ t_env_list	*first_node(t_env_list *lst);
 t_env_list	*get_node(t_env_list *head, int index);
 t_env_list	*new_env_list(char **tab);
 void		list_append(t_env_list **lst, char *element);
-// void		list_detach(t_env_list **lst);
-
-/* builtin: export */
 void		content_swap(t_env_list *one, t_env_list *two);
 void		bubble_sort(t_env_list **head);
+
+/* builtin: export */
 int			check_var_format(void *var);
 bool		existing_var_in_env(void *var, t_env_list *head);
 char		*trim_back(void *var);
-void		print_export(t_env_list *ascii_env);
-void		add_var_export(void *var, t_env_list **head);
+int			print_export(t_env_list *ascii_env);
+int			add_var_export(void *var, t_env_list **head);
 
 
 

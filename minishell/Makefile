@@ -10,8 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			= main.c ck_builtin_others.c ck_builtin_env.c ck_list_helpers.c \
-				ck_list_helpers2.c ck_builtin_export.c ck_builtin_echo.c
+SRCS_BI			= ./srcs/builtins/
+
+SRCS			= main.c ${SRCS_BI}builtin_pwd_cd.c ${SRCS_BI}builtin_env.c ${SRCS_BI}linked_list_utils.c \
+				${SRCS_BI}linked_list_utils2.c ${SRCS_BI}builtin_export.c ${SRCS_BI}builtin_echo.c \
+				${SRCS_BI}builtin_exit.c ${SRCS_BI}builtin_unset.c ${SRCS_BI}builtin_decide.c
 
 OBJS			= ${SRCS:.c=.o}
 
