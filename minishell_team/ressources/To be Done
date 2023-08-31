@@ -1,0 +1,60 @@
+NORMINETTE
+	: norminette on my parts (nate) ❌
+
+PARSING
+-> Support Heredoc
+	: handle multiple eof ✅
+	: handle delimitor : "eof" -> eof ✅
+	: heredoc without expands ✅
+	: heredoc with expands ✅
+	: free the resources and unlink the file ✅
+	: gestion des erreurs dans le heredoc ✅
+
+-> Support syntax
+	: segfault when syntax isn't correct ✅
+
+-> EXPAND
+	: segfault
+
+EXECUTION
+-> Support full path command: /bin/ls ✅
+
+SIGNAL
+-> Support signals:
+	: buggy output when wc + Ctrl C ✅
+	: need to test if ctrl + \ gives "Quit: 3" when interrupting a process ✅
+
+ERROR MANAGEMENT
+-> Open pipe:
+	: currently we have this:
+		~/Desktop/minishell_team$ ls |
+		minishell : syntax error near unexpected token `|' ✅ (not necessary)
+-> cat | cat | ls:
+	: should show ls and then wait for further input ✅
+
+-> buffer management
+
+-> error codes:
+	: 127 for wrong command ✅
+	: 1 for right command with wrong option or "no file or directory" error ✅
+	: 130 for SIGINT interruption ✅
+	: 131 for SIGQUIT interruption ✅
+	: 0 for all good ✅
+
+bash-3.2$ >a >b
+bash-3.2$ <a <b <c cat
+bash: c: No such file or directory
+bash-3.2$ <a <c <b cat
+bash: c: No such file or directory
+
+-> leaks:
+	: 1 root leak when putting a wrong option for execve (and also when just putting ls or normal builtin)
+	16 leaked bytes
+
+		~/Desktop/minishell_team$ ls 9
+		ls: 9: No such file or directory
+		~/Desktop/minishell_team$ echo $?
+		Last exit status = 1
+		~/Desktop/minishell_team$ asdg
+		~/Desktop/minishell_team$ echo $?
+		Last exit status = 1
